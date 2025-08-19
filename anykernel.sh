@@ -1,21 +1,29 @@
 ### AnyKernel3 Ramdisk Mod Script
-## osm0sis @ xda-developers
+## Modified by Shahid Shamim (Realme 6 Pro & 7 Pro Support)
+## Based on osm0sis @ xda-developers
 
 ### AnyKernel setup
 # global properties
 properties() { '
-kernel.string=ExampleKernel by osm0sis @ xda-developers
+kernel.string=Custom Kernel by Shahid Shamim
 do.devicecheck=1
 do.modules=0
 do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
-device.name1=maguro
-device.name2=toro
-device.name3=toroplus
-device.name4=tuna
-device.name5=
-supported.versions=
+
+# Supported devices
+device.name1=RMX2061
+device.name2=RMX2170
+device.name3=atoll
+device.name4=reatoll
+device.name5=realme6pro
+device.name6=realme7pro
+device.name7=rmx2061
+device.name8=rmx2170
+
+# Supported Android versions
+supported.versions=12-16
 supported.patchlevels=
 supported.vendorpatchlevels=
 '; } # end properties
@@ -24,15 +32,18 @@ supported.vendorpatchlevels=
 ### AnyKernel install
 ## boot files attributes
 boot_attributes() {
-set_perm_recursive 0 0 755 644 $RAMDISK/*;
-set_perm_recursive 0 0 750 750 $RAMDISK/init* $RAMDISK/sbin;
+  set_perm_recursive 0 0 755 644 $RAMDISK/*;
+  set_perm_recursive 0 0 750 750 $RAMDISK/init* $RAMDISK/sbin;
 } # end attributes
 
+
 # boot shell variables
-BLOCK=/dev/block/platform/omap/omap_hsmmc.0/by-name/boot;
-IS_SLOT_DEVICE=0;
+# Realme 6 Pro (RMX2061, atoll) & Realme 7 Pro (RMX2170, reatoll)
+BLOCK=/dev/block/bootdevice/by-name/boot;
+IS_SLOT_DEVICE=0;   # Both are A-only devices
 RAMDISK_COMPRESSION=auto;
 PATCH_VBMETA_FLAG=auto;
+
 
 # import functions/variables and setup patching - see for reference (DO NOT REMOVE)
 . tools/ak3-core.sh;
